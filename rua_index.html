@@ -2,130 +2,226 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rua Étterem</title>
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>RUA Asian Food and More | Érd</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            background-color: #fcf8f3;
-            color: #333;
+        /* Alapvető beállítások és színek */
+        :root {
+            --primary-color: #D32F2F; /* Tradicionális ázsiai piros */
+            --secondary-color: #FFB300;
+            --text-color: #333333;
+            --bg-color: #F9F9F9;
+            --white: #FFFFFF;
         }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 2rem;
-            text-align: center;
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        
+        /* Fejléc és navigáció */
+        header { 
+            background-color: var(--white); padding: 1rem 5%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            position: sticky; top: 0; z-index: 1000; 
         }
-        nav {
-            background: #e67e22;
-            padding: 10px;
-            text-align: center;
-            position: sticky;
-            top: 0;
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--text-color); font-weight: 300; font-size: 1rem; display: block; letter-spacing: 0;}
+        
+        nav ul { list-style: none; display: flex; gap: 2rem; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: color 0.3s; text-transform: uppercase; font-size: 0.9rem;}
+        nav a:hover { color: var(--primary-color); }
+        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--primary-color); }
+
+        /* Nyitókép (Hero) */
+        .hero { 
+            text-align: center; padding: 6rem 1rem; 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=1920&q=80') center/cover; 
+            color: var(--white); 
         }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-weight: bold;
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; letter-spacing: 2px;}
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-weight: 300;}
+        .btn { 
+            padding: 1rem 2.5rem; background-color: var(--primary-color); color: var(--white); 
+            text-decoration: none; border-radius: 50px; font-weight: bold; 
+            transition: background 0.3s, transform 0.2s; display: inline-block;
         }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        .btn:hover { background-color: #B71C1C; transform: translateY(-2px); }
+
+        /* Tartalmi rész */
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 5%; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 3rem; color: var(--primary-color); text-transform: uppercase; position: relative;}
+        .section-title::after { content: ''; width: 60px; height: 3px; background: var(--secondary-color); display: block; margin: 10px auto 0; }
+
+        /* Étlap Hálózat (2 oldal) */
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .menu-page { background: var(--white); padding: 2.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .menu-category { font-size: 1.5rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: var(--text-color); }
+        
+        .menu-item { display: flex; justify-content: space-between; margin-bottom: 1.2rem; align-items: baseline; }
+        .menu-item-info { flex: 1; padding-right: 1.5rem; }
+        .menu-item-title { font-weight: 700; font-size: 1.1rem; }
+        .menu-item-desc { font-size: 0.85rem; color: #777; margin-top: 0.2rem; font-style: italic;}
+        .menu-item-price { font-weight: 700; color: var(--primary-color); font-size: 1.1rem; white-space: nowrap; }
+
+        /* Információk és Kapcsolat */
+        .info-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; 
+            background: var(--white); padding: 3rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
         }
-        h2 {
-            border-bottom: 2px solid #e67e22;
-            padding-bottom: 10px;
-            color: #2c3e50;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
-            margin-top: 40px;
+        .info-card h3 { margin-bottom: 1rem; color: var(--primary-color); font-size: 1.3rem;}
+        .info-card p { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;}
+
+        /* Lábjegyzet */
+        footer { text-align: center; padding: 2rem; background-color: #1A1A1A; color: #CCC; font-size: 0.9rem; }
+
+        /* Mobil Reszponzivitás */
+        @media (max-width: 768px) {
+            .menu-grid { grid-template-columns: 1fr; gap: 2rem;}
+            nav ul { 
+                display: none; flex-direction: column; position: absolute; top: 100%; left: 0; 
+                width: 100%; background: var(--white); padding: 1rem 0; box-shadow: 0 5px 10px rgba(0,0,0,0.1); 
+            }
+            nav ul.active { display: flex; }
+            nav ul li { text-align: center; margin: 1rem 0; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 4rem 1rem; }
+            .menu-page { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Rua Étterem</h1>
-        <p>Asian Food and More</p>
+        <div class="logo">RUA <span>Asian Food and More</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#rolunk">Rólunk</a></li>
+                <li><a href="#etlap">Étlap</a></li>
+                <li><a href="#kapcsolat">Kapcsolat</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <nav>
-        <a href="#rolunk">Rólunk</a>
-        <a href="#etlap">Étlap</a>
-        <a href="#kapcsolat">Kapcsolat</a>
-    </nav>
+    <section class="hero" id="rolunk">
+        <h1>Autentikus Ázsiai Ízek Érden</h1>
+        <p>Fedezd fel a vietnámi és ázsiai konyha legjavát! Friss alapanyagok, tradicionális receptek és páratlan ízélmény vár Érd szívében.</p>
+        <a href="#etlap" class="btn">Étlap Megtekintése</a>
+    </section>
 
-    <div class="container">
-        <section id="rolunk">
-            <h2>Üdvözöljük nálunk!</h2>
-            <p>A *Rua Étterem* 2010 óta várja a gasztronómia szerelmeseit. Friss, helyi alapanyagokból dolgozunk, hogy minden falat élmény legyen.</p>
-        </section>
+    <section class="container" id="etlap">
+        <h2 class="section-title">Étlapunk</h2>
+        
+        <div class="menu-grid">
+            <div class="menu-page">
+                <h3 class="menu-category">Előételek</h3>
+                
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Tavaszi Tekercs</div>
+                        <div class="menu-item-desc">Üvegtészta, darált sertéshús, fafülgomba, répa, káposzta.</div>
+                    </div>
+                    <div class="menu-item-price">3 190 Ft</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Bao</div>
+                        <div class="menu-item-desc">Csípős majonéz, házi savanyúság, koriander, menta, grillezett császárhús.</div>
+                    </div>
+                    <div class="menu-item-price">4 590 Ft</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Tempura Rák</div>
+                        <div class="menu-item-desc">Panko morzsában sült garnélarák, csípős majonéz.</div>
+                    </div>
+                    <div class="menu-item-price">3 190 Ft</div>
+                </div>
 
-        <section id="etlap">
-            <h2>Kiemelt Ételeink</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Étel neve</th>
-                        <th>Leírás</th>
-                        <th>Ár</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>*Sült üvegtészta*</td>
-                        <td>Csirke/Marha/Rák/Vega</td>
-                        <td>3690.-/3890.-/3990.-/3390.-</td>
-                    </tr>
-                    <tr>
-                        <td>*Sült Udon tészta*</td>
-                        <td>Csirke/Marha/Rák/Vega</td>
-                        <td>3690.-/3890.-/4090.-/3390.-</td>
-                    </tr>
-                    <tr>
-                        <td>*Phad Thai*</td>
-                        <td>Csirke/Marha/Rák/Vega</td>
-                        <td>3690.-/3890.-/4090.-/3590.-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+                <h3 class="menu-category" style="margin-top: 2rem;">Levesek</h3>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Pho Leves - Marha</div>
+                        <div class="menu-item-desc">Hagyományos vietnámi leves, rizstészta, újhagyma, babcsíra, koriander.</div>
+                    </div>
+                    <div class="menu-item-price">4 990 Ft</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Tom Yum Leves - Csirke</div>
+                        <div class="menu-item-desc">Kókusztejes pikáns leves, gomba, gyömbér, citromlevél.</div>
+                    </div>
+                    <div class="menu-item-price">4 490 Ft</div>
+                </div>
+            </div>
 
-        <section id="kapcsolat">
-            <h2>Kapcsolat</h2>
-            <p>📍 **Cím:** Kálvin tér 3-5., Érd, Hungary, 2030</p>
-            <p>📞 **Telefon:** (30) 208 4888</p>
-            <p>✉️ **Email:** ruateamkft@gmail.com</p>
-        </section>
-    </div>
+            <div class="menu-page">
+                <h3 class="menu-category">Főételek (Wok & Tészta)</h3>
+                
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Pad Thai - Csirke</div>
+                        <div class="menu-item-desc">Rizstészta, tojás, tofu, babcsíra, mogyoró, házi pad thai szósz.</div>
+                    </div>
+                    <div class="menu-item-price">4 790 Ft</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Pad Thai - Marha</div>
+                        <div class="menu-item-desc">Rizstészta, tojás, tofu, babcsíra, mogyoró, házi pad thai szósz.</div>
+                    </div>
+                    <div class="menu-item-price">4 990 Ft</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Sült Rizs - Választható hússal</div>
+                        <div class="menu-item-desc">Rizs, tojás, kukorica, borsó, pak choi, pirított hagyma.</div>
+                    </div>
+                    <div class="menu-item-price">4 390 Ft-tól</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-title">Vörösboros Marha Vietnámi Lángossal</div>
+                        <div class="menu-item-desc">Fűszeres omlós marhahús, répa, vörösboros szaft, házi lángos.</div>
+                    </div>
+                    <div class="menu-item-price">4 270 Ft</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="footer">
-        <p>&copy; 2026 Rua Étterem - Minden jog fenntartva.</p>
-    </div>
+    <section class="container" id="kapcsolat" style="padding-top: 0;">
+        <h2 class="section-title">Kapcsolat & Információk</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📍 Elérhetőség</h3>
+                <p><strong>Cím:</strong> 2030 Érd, Kálvin tér 3-5.</p>
+                <p><strong>Telefon:</strong> +36 30 208 4888</p>
+                <p><strong>Email:</strong> ruateamkft@gmail.com</p>
+            </div>
+            <div class="info-card">
+                <h3>🕒 Nyitvatartás</h3>
+                <p><strong>Hétfő - Szombat:</strong> 11:00 - 21:00</p>
+                <p><strong>Vasárnap:</strong> Zárva</p>
+                <p><i>(A nyitvatartás ünnepnapokon változhat)</i></p>
+            </div>
+            <div class="info-card">
+                <h3>🛵 Házhozszállítás</h3>
+                <p>Ételeinket kényelmesen megrendelheted otthonodba is a <strong>Wolt</strong> és a <strong>Foodora</strong> alkalmazásokon keresztül!</p>
+            </div>
+        </div>
+    </section>
 
+    <footer>
+        <p>&copy; 2026 RUA Asian Food and More Érd. Minden jog fenntartva.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("nav-menu");
+            menu.classList.toggle("active");
+        }
+    </script>
 </body>
-
 </html>
